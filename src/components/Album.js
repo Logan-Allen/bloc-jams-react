@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import albumData from './../data/albums';
 
 class Album extends Component {
-    contructor(props) {
+    constructor(props) {
         super(props);
         
         const album = albumData.find( album => {
@@ -18,7 +18,7 @@ class Album extends Component {
         return (
             <section className="album">
                 <section id="album-info">
-                  <img id="album-cover-art" src={this.state.album.albumCover}/>
+                  <img id="album-cover-art" src={this.state.album.albumCover} alt="Album cover Art"/>
                   <div className= "album-details">
                     <h1 id="album-title">{this.state.album.title}</h1>
                     <h2 className="artist">{this.state.album.artist}</h2>
