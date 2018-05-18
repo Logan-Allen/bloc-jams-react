@@ -6,7 +6,7 @@ class Album extends Component {
         super(props);
         
         const album = albumData.find( album => {
-            return album.slug === this.props.match.params.slug
+            return album.slug === this.props.match.params.slug;
         });
         
         this.state = {
