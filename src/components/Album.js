@@ -39,12 +39,15 @@ class Album extends Component {
         if (this.state.isPlaying && isSameSong) {
             this.pause();
         }   else {
+            if (!isSameSong) { this.setSong(song); }
             this.play();
         }
     }
     
     render() {
         return (
+            
+            
             <section className="album">
                 <section id="album-info">
                   <img id="album-cover-art" src={this.state.album.albumCover} alt="Album cover Art"/>
@@ -67,6 +70,15 @@ class Album extends Component {
                             <div>{song.title}</div>
                             <div>{song.artist}</div>
                             <div>{song.length} songs</div>
+                            <td className="song-actions">
+                                <button>
+                                    <span className="song-number">{index+1}</span>
+                                    <span className="ion-play"></span>
+                                    <span className="ion-pause"></span>
+                                </button>
+                            </td>
+                            <td className="song-title">{song.title}</td>
+                            <td className="song-duration">{song.duration}</td>
                         </tr>
                     )}
                   </tbody>
