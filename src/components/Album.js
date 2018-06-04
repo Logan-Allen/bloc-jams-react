@@ -66,10 +66,6 @@ class Album extends Component {
                   <tbody>
                     {this.state.album.songs.map( ( song, index) =>
                         <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-                            <img src={song.albumCover} alt={song.title} />
-                            <div>{song.title}</div>
-                            <div>{song.artist}</div>
-                            <div>{song.length} songs</div>
                             <td className="song-actions">
                                 <button>
                                     <span className="song-number">{index+1}</span>
