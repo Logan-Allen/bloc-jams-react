@@ -43,7 +43,24 @@ class Album extends Component {
             this.play();
         }
     }
-    
+    getInitialState() {
+  return {
+    mouseHover: false
+  };
+}
+    mouseEnter = () => {
+        this.setState({ mouseHover: true });
+}
+    mouseLeave = () => {
+        this.setState({ mouseHover: false });
+}
+    render() {
+        return (
+            <div onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
+                {this.state.mouseHover ? <button>Your Button</button> : null}
+            </div>
+  );
+}
     render() {
         return (
             
@@ -64,9 +81,9 @@ class Album extends Component {
                     <col id="song-duration-column"/>
                   </colgroup>
                   <tbody>
-                    {this.state.album.songs.map( ( song, index) =>
+                    {this.state.album.songs.map(( song, index) =>
                         <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-                            <td className="song-actions">
+                            <td className="song-actions" onMouseLeave={() => this.handleSongClick(song)} >
                                 <button>
                                     <span className="song-number">{index+1}</span>
                                     <ion-icon name="play"></ion-icon>
