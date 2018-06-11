@@ -6,15 +6,16 @@ class Album extends Component {
         super(props);
         
         const album = albumData.find( album => {
-            return album.slug === this.props.match.params.slug;
+            return album.slug === this.props.match.params.slug
         });
         
         this.state = {
-            
             album: album,
             currentSong: album.songs[0],
             isPlaying: false,
-            isHovered: false
+            isHovered: false,
+            dynamicClass: "song-number",
+            targetId: 0
         };
         
         this.audioElement = document.createElement('audio');
@@ -22,12 +23,18 @@ class Album extends Component {
     }
     play() {
         this.audioElement.play();
-        this.setState({ isPlaying: true });
+        this.setState({ 
+            isPlaying: true,
+            dynamicClass: "icon ion-ios-pause"
+        });
     }
     
     pause() {
         this.audioElement.pause();
-        this.setState({ isPlaying: false });
+        this.setState({ 
+            isPlaying: false,
+            dynamicClass: "icon ion-ios-play"
+        });
     }
     
     setSong(song) {
@@ -44,6 +51,32 @@ class Album extends Component {
             this.play();
         }
 }
+
+    mouseEnter(e) {
+        console.log(e.target.id);
+        if (!this.state.currentSong || !this.state.isPlaying){
+            this.setState({
+                dynamicClass: "icon ion-ios-play",
+                targetId: e.target.id
+            });
+        }
+    }
+
+    mouseLeave(e){
+        console.log(e.target);
+        if (!this.state.currentSong || !this.state.isPlaying){
+            this.setState({
+                dynamicClass: "song-number",
+                targetId: e.target.id
+            });
+        }
+        else if (this.state.currentSong){
+            this.setState({
+                dynamicClass: "icon ion-ios-pause",
+                targetId: e.target.id
+            });
+        }
+    }
 
     render() {
         return (
@@ -66,13 +99,12 @@ class Album extends Component {
                   </colgroup>
                   <tbody>
                     {this.state.album.songs.map(( song, index) => (
-                        <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.setState({isHovered: index + 1})} onMouseLeave={() => this.setState({isHovered: false})} >
-                            <td className="song-actions"  >
-                                <button id="song-buttons"> 
-                                    {(this.state.currentSong.title === song.title) ? 
-                                    (<span className={this.state.isPlaying ? "ion-pause" : "ion-play"} />) :
-									this.state.isHovered === index + 1 ? (<span className="ion-play" />) :
-									(<span className="song-number">{index + 1}</span>)}
+                        <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
+                            <td className="song-actions">
+                                <button> 
+                                    <span className={(this.state.isPlaying && (this.state.currentSong === song)) ? "hidden-song" : "song-number"}>{index + 1}</span>
+                                    <span className={(this.state.isPlaying && (this.state.currentSong === song)) ? "icon ion-ios-pause" : " "}> </span>
+                                    <span className={(this.state.isPlaying && (this.state.currentSong === song)) ? " " : "icon ion-ios-play"}> </span>
                                 </button>
                             </td>
                             <td className="song-title">{song.title}</td>
