@@ -6,14 +6,15 @@ class Album extends Component {
         super(props);
         
         const album = albumData.find( album => {
-            return album.slug === this.props.match.params.slug
+            return album.slug === this.props.match.params.slug;
         });
         
         this.state = {
             
             album: album,
             currentSong: album.songs[0],
-            isPlaying: false
+            isPlaying: false,
+            isHovered: false
         };
         
         this.audioElement = document.createElement('audio');
@@ -21,7 +22,7 @@ class Album extends Component {
     }
     play() {
         this.audioElement.play();
-        this.setState({ isPLaying: true });
+        this.setState({ isPlaying: true });
     }
     
     pause() {
@@ -42,25 +43,8 @@ class Album extends Component {
             if (!isSameSong) { this.setSong(song); }
             this.play();
         }
-    }
-    getInitialState() {
-  return {
-    mouseHover: false
-  };
 }
-    mouseEnter = () => {
-        this.setState({ mouseHover: true });
-}
-    mouseLeave = () => {
-        this.setState({ mouseHover: false });
-}
-    render() {
-        return (
-            <div onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-                {this.state.mouseHover ? <button>Your Button</button> : null}
-            </div>
-  );
-}
+
     render() {
         return (
             
@@ -69,9 +53,9 @@ class Album extends Component {
                 <section id="album-info">
                   <img id="album-cover-art" src={this.state.album.albumCover} alt="Album cover Art"/>
                   <div className= "album-details">
-                    <h1 id="album-title">{this.state.album.title}</h1>
-                    <h2 className="artist">{this.state.album.artist}</h2>
-                    <div id="release-info">{this.state.album.releaseInfo}</div>
+                    <span id="album-title">{this.state.album.title}</span>
+                    <span className="artist">{this.state.album.artist}</span>
+                    <span id="release-info">{this.state.album.releaseInfo}</span>
                   </div>
                 </section>
                 <table id="song-list">
@@ -81,19 +65,20 @@ class Album extends Component {
                     <col id="song-duration-column"/>
                   </colgroup>
                   <tbody>
-                    {this.state.album.songs.map(( song, index) =>
-                        <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-                            <td className="song-actions" onMouseLeave={() => this.handleSongClick(song)} >
-                                <button>
-                                    <span className="song-number">{index+1}</span>
-                                    <ion-icon name="play"></ion-icon>
-                                    <ion-icon name="pause"></ion-icon>
+                    {this.state.album.songs.map(( song, index) => (
+                        <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.setState({isHovered: index + 1})} onMouseLeave={() => this.setState({isHovered: false})} >
+                            <td className="song-actions"  >
+                                <button id="song-buttons"> 
+                                    {(this.state.currentSong.title === song.title) ? 
+                                    (<span className={this.state.isPlaying ? "ion-pause" : "ion-play"} />) :
+									this.state.isHovered === index + 1 ? (<span className="ion-play" />) :
+									(<span className="song-number">{index + 1}</span>)}
                                 </button>
                             </td>
                             <td className="song-title">{song.title}</td>
                             <td className="song-duration">{song.duration}</td>
                         </tr>
-                    )}
+                    ))}
                   </tbody>
                 </table>
             </section>
