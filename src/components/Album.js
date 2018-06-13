@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
 
+
+
 class Album extends Component {
     constructor(props) {
         super(props);
@@ -10,10 +12,10 @@ class Album extends Component {
         });
         
         this.state = {
-            
             album: album,
             currentSong: album.songs[0],
-            isPlaying: false
+            isPlaying: false,
+            isHovering: false
         };
         
         this.audioElement = document.createElement('audio');
@@ -21,12 +23,13 @@ class Album extends Component {
     }
     play() {
         this.audioElement.play();
-        this.setState({ isPLaying: true });
+        this.setState({ isPlaying: true });
     }
     
     pause() {
         this.audioElement.pause();
-        this.setState({ isPlaying: false });
+        this.setState({ 
+            isPlaying: false });
     }
     
     setSong(song) {
@@ -44,6 +47,7 @@ class Album extends Component {
         }
     }
     
+
     render() {
         return (
             
@@ -64,17 +68,21 @@ class Album extends Component {
                     <col id="song-duration-column"/>
                   </colgroup>
                   <tbody>
-                    {this.state.album.songs.map( ( song, index) =>
-                        <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
+                    {this.state.album.songs.map(( song, index) => 
+                        <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.setState({isHovering: index + 1})} onMouseLeave={() => this.setState({isHovering: false})}>
                             <td className="song-actions">
-                                <button>
-                                    <span className="song-number">{index+1}</span>
-                                    <ion-icon name="play"></ion-icon>
-                                    <ion-icon name="pause"></ion-icon>
+                                <button id ="song-action-buttons">
+                                { (this.state.currentSong.title === song.title) ? <span className= {this.state.isPlaying ? "icon ion-ios-pause" : "icon ion-ios-play"}></span>
+                                  :
+                                  (this.state.isHovering === index + 1) ? <span className="icon ion-ios-play"></span> 
+                                  : 
+                                  <span className="song-number">{index + 1}</span>
+                                }
                                 </button>
                             </td>
                             <td className="song-title">{song.title}</td>
                             <td className="song-duration">{song.duration}</td>
+                            
                         </tr>
                     )}
                   </tbody>
