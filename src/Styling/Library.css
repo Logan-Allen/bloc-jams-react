@@ -1,0 +1,23 @@
+.library-section {
+  padding-bottom: 1rem;
+}
+
+.library-info {
+  text-align: center;
+  font-size: 1rem;
+  color: rgb(153, 103, 265);
+}
+
+a:hover.library-info {
+  color: blue;
+  text-decoration: none;
+}
+
+.img {
+  margin: 0 auto;
+}
+
+.library-artist {
+  font-size: 1.5rem;
+  padding-top: .5rem;
+}

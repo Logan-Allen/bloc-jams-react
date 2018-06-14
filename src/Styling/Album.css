@@ -1,0 +1,47 @@
+.artist {
+    font-size: 1rem;
+}
+
+.album-details {
+    color: rgb(120, 13, 123);
+}
+
+.album-info {
+    padding: 14rem;
+}
+
+.album-cover-art {
+    margin: 0 auto;
+}
+
+#album-title {
+    font-size: 2rem;
+}
+
+#release-info {
+    font-size: .75rem;
+}
+
+#song-action-buttons {
+    border: none;
+    background: none;
+}
+
+.song-number, .ion-play, .ion-pause {
+    font-size: 1.75rem;
+    background: none;
+    border: none;
+    color: rgba(120, 13, 123, 0.8);
+}
+
+tr {
+    border: .25rem solid rgb(220, 64, 147);
+}
+
+tr:hover {
+    cursor: pointer;
+}
+
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
