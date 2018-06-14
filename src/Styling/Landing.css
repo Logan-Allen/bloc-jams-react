@@ -1,0 +1,51 @@
+#landing-title {
+  font-family: "Verdana", fantasy;
+  font-size: 5rem;
+  text-align: center;
+  color: rgb(70, 65, 68);
+}
+
+.selling-points {
+  border-top: 2rem solid rgba(129, 99, 139, 0.75);
+  border-radius: 50%;
+}
+
+.point-title, .point-description {
+  text-align: center;
+  color: black;
+}
+
+.point-description {
+  font-weight: bold;
+  font-family: "Bookman", times;
+}
+
+.point-title {
+  font-size: 2rem;
+  font-family: "Georgia", sans-serif;
+}
+
+.point-1 {
+  background-color: rgba(153, 128, 185, 0.77);
+  border-left: .75rem solid rgba(156, 158, 255, .5);
+  border-top: .75rem solid rgba(156, 158, 255, .5);
+  border-right: .75rem solid rgb(156, 158, 255);
+  border-bottom: .25rem solid rgb(156, 158, 255);
+  margin-bottom: .5px;
+}
+
+.point-2 {
+  background-color: rgba(153, 128, 185, 0.77);
+  border-left: .75rem solid rgba(169, 125, 290, .5);
+  border-top: .75rem solid rgba(169, 125, 290, .5);
+  border-right: .75rem solid rgb(169, 125, 290);
+  border-bottom: .5rem solid rgb(169, 125, 290);
+}
+
+.point-3 {
+  background-color: rgba(153, 128, 185, 0.77);
+  border-left: .75rem solid rgba(180, 102, 220, .5);
+  border-top: .75rem solid rgba(180, 102, 220, .5);
+  border-bottom: .75rem solid rgb(180, 102, 220);
+  border-right: .75rem solid rgb(150, 102, 220);
+}

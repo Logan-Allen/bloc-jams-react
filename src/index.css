@@ -1,5 +1,12 @@
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "Verdana", Helvetica, sans-serif;
+  overflow-y: scroll;
+  background-color: rgb(190, 195, 123);
+}
+
+html {
+  font-size: 16px;
 }
